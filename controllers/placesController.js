@@ -9,7 +9,15 @@ import fs from "fs/promises";
 import "dotenv/config";
 import { v2 as cloudinary } from "cloudinary";
 import sharp from "sharp";
-import { fetchPlaces, fetchCatPics, fetchMoreCatPics, fetchDogPics, fetchMoreDogPics } from "../API's/Api.js";
+import {
+  fetchPlaces,
+  fetchCatPics,
+  fetchMoreCatPics,
+  fetchDogPics,
+  fetchMoreDogPics,
+  fetchLocationKey,
+  fetchCurrentWeatherConditions,
+} from "../API's/Api.js";
 
 
 const {
@@ -51,6 +59,31 @@ const findPlaces = async (req, res) => {
 });
 
   res.status(201).json(amendedResult);
+};
+
+const getWeather = async (req, res) => {
+  const { lat, long } = req.query;
+
+  const response = await fetchLocationKey(lat, long);
+
+
+  const result = await response.json();
+
+    if (!result?.Key) {
+      throw httpError(404, "Location key not found");
+    }
+
+  const finalResponse = await fetchCurrentWeatherConditions(result.Key);
+
+  const finalResult = await finalResponse.json();
+
+
+
+  if (!finalResult) {
+    throw httpError(404, "Weather conditions not found");
+  }
+
+  res.status(200).json(finalResult);
 };
 
 const getMyPlaceById = async (req, res) => {
@@ -252,4 +285,5 @@ export {
   getDogPics,
   getMoreCatPics,
   getMoreDogPics,
+  getWeather,
 };

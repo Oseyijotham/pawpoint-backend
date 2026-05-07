@@ -17,17 +17,16 @@ const placesSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      default:
-        "https://geo-pets-backend-qokl.onrender.com/avatars/unknownCustomer.png",
+      default: "http://localhost:8001/avatars/unknownCustomer.png",
     },
     description: {
       type: String,
       default: "Enter place description",
     },
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
-const Place = model("place", placesSchema);
+const Place = model("pawpoint-place", placesSchema);
 
 export { Place };

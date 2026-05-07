@@ -1,4 +1,4 @@
-const { CAT_AND_DOG_API_KEY, OVERTUREMAPS_API_KEY } = process.env;
+const { CAT_AND_DOG_API_KEY, OVERTUREMAPS_API_KEY, ACCU_WEATHER_KEY } = process.env;
 
 export function fetchBreeds() {
   return fetch("https://api.thecatapi.com/v1/breeds", {
@@ -19,7 +19,7 @@ export function fetchCatByBreed(identifier) {
         "x-api-key":
           "live_veNZdtcwPdxTq8JCOCN8dW0LvRfMhLJHM4uZOHDCWDC5ve8GaIeqqX5Y2CT6lrKI",
       },
-    }
+    },
   );
 }
 
@@ -40,7 +40,7 @@ export function fetchMoreCatPics(pages) {
       headers: {
         "x-api-key": CAT_AND_DOG_API_KEY,
       },
-    }
+    },
   );
 }
 
@@ -61,10 +61,9 @@ export function fetchMoreDogPics(pages) {
       headers: {
         "x-api-key": CAT_AND_DOG_API_KEY,
       },
-    }
+    },
   );
 }
-
 
 export function fetchPlaces(category, country) {
   const formattedCategory = category.toLowerCase().replace(/\s+/g, "_");
@@ -76,6 +75,34 @@ export function fetchPlaces(category, country) {
         "x-api-key": OVERTUREMAPS_API_KEY,
         "Content-Type": "application/json",
       },
-    }
+    },
   );
 }
+
+export function fetchLocationKey(latitude, longitude) {
+  
+  return fetch(
+    `https://dataservice.accuweather.com/locations/v1/cities/geoposition/search?q=${latitude}, ${longitude}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ACCU_WEATHER_KEY}`,
+      },
+    },
+  );
+}
+
+export function fetchCurrentWeatherConditions(locationKey) {
+  return fetch(
+    `https://dataservice.accuweather.com/currentconditions/v1/${locationKey}`,
+    {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${ACCU_WEATHER_KEY}`,
+      },
+    },
+  );
+}
+

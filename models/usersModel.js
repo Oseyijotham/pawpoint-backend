@@ -25,8 +25,7 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      default:
-        "https://geo-pets-backend-qokl.onrender.com/avatars/unknownUser.png",
+      default: "http://localhost:8001/avatars/unknownUser.png",
     },
     token: {
       type: String,
@@ -61,9 +60,9 @@ const userSchema = new Schema(
       required: [true, "Verify token is required"],
     },*/
   },
-  { versionKey: false }
+  { versionKey: false },
 );
 
-const User = model("user", userSchema);
+const User = model("pawpoint-user", userSchema);
 
 export { User };

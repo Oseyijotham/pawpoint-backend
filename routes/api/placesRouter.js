@@ -13,6 +13,7 @@ import {
   getDogPics,
   getMoreCatPics,
   getMoreDogPics,
+  getWeather,
 } from "../../controllers/placesController.js";
 import { authenticateToken } from "../../middlewares/authenticateToken.js";
 import { upload } from "../../middlewares/upload.js";
@@ -43,6 +44,8 @@ router.delete("/deletePlaces/:placeId", authenticateAndValidateKey, ctrlWrapper(
 router.patch("/avatars/:placeId", authenticateAndValidateKey, upload.single("avatar"), ctrlWrapper(updatePlaceAvatar));
 
 router.patch("/detailsUpdate/:placeId", authenticateAndValidateKey, ctrlWrapper(updatePlaceDetailsById));
+
+router.get("/getWeather", authenticateToken, ctrlWrapper(getWeather));
 
 
 
