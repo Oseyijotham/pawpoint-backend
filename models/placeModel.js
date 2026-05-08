@@ -17,7 +17,8 @@ const placesSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      default: "http://localhost:8001/avatars/unknownCustomer.png",
+      default:
+        "https://pawpoint-backend.onrender.com/avatars/unknownCustomer.png",
     },
     description: {
       type: String,
