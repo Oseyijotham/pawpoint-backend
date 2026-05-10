@@ -3,6 +3,8 @@ import logger from "morgan";
 import cors from "cors";
 import { router as placesRouter } from "./routes/api/placesRouter.js";
 import { router as usersRouter } from "./routes/api/usersRouter.js";
+import { router as catRouter } from "./routes/api/catRouter.js";
+import { router as dogRouter } from "./routes/api/dogRouter.js";
 
 const app = express();
 
@@ -23,6 +25,8 @@ app.use(express.static("public"));
 
 app.use("/api/places", placesRouter);
 app.use("/api/users", usersRouter);
+app.use("/api/cats", catRouter);
+app.use("/api/dogs", dogRouter);
 
 // Handles errors caused by requests to non-existent routes
 app.use((req, res) => {

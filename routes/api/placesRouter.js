@@ -48,17 +48,4 @@ router.patch("/detailsUpdate/:placeId", authenticateAndValidateKey, ctrlWrapper(
 router.get("/getWeather", authenticateToken, ctrlWrapper(getWeather));
 
 
-
-//router.post("/saveplace", authenticateToken, ctrlWrapper(addPlaces));
-
-router.get("/customApi/savedPlaces", ValidateKeyAPI, ctrlWrapper(getSavedPlaces));
-
-router.get("/customApi/getOnePlace/:placeId", ValidateKeyAPI, ctrlWrapper(getMyPlaceById));
-
-router.delete("/customApi/deletePlaces/:placeId", ValidateKeyAPI, ctrlWrapper(deletePlaceById));
-
-router.patch("/customApi/avatars/:placeId", ValidateKeyAPI, upload.single("avatar"), ctrlWrapper(updatePlaceAvatar));
-
-router.patch("/customApi/detailsUpdate/:placeId", ValidateKeyAPI, ctrlWrapper(updatePlaceDetailsById));
-
 export { router };
