@@ -51,8 +51,22 @@ const getSavedDogImages = async (req, res) => {
   res.status(200).json(result);
 };
 
+const deleteDogImageById = async (req, res) => {
+  
+  const { imageId } = req.params;
+
+  const myDeleted = await Dog.findByIdAndDelete(imageId);
+
+  if (!myDeleted) {
+    throw httpError(404, "Resource not found");
+  }
+
+   res.status(201).json(myDeleted);
+  
+};
+
 
 
 
 // prettier-ignore
-export { addDogImage, getSavedDogImages };
+export { addDogImage, getSavedDogImages, deleteDogImageById };

@@ -68,5 +68,6 @@ const deleteCatImageById = async (req, res) => {
 
 
 
+
 // prettier-ignore
 export { addCatImage, getSavedCatImages, deleteCatImageById };
