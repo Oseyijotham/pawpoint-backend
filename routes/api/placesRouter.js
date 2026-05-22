@@ -14,6 +14,7 @@ import {
   getMoreCatPics,
   getMoreDogPics,
   getWeather,
+  getSavedPlacesApi
 } from "../../controllers/placesController.js";
 import { authenticateToken } from "../../middlewares/authenticateToken.js";
 import { upload } from "../../middlewares/upload.js";
@@ -25,6 +26,8 @@ const router = express.Router();
 
 router.get("/savedPlaces", authenticateAndValidateKey, ctrlWrapper(getSavedPlaces));
 
+router.get("/savedPlacesApi", ValidateKeyAPI, ctrlWrapper(getSavedPlaces));
+
 router.post("/", authenticateToken, ctrlWrapper(findPlaces));
 
 router.post("/saveplace", authenticateToken, ctrlWrapper(addPlaces));
@@ -32,6 +35,8 @@ router.post("/saveplace", authenticateToken, ctrlWrapper(addPlaces));
 router.get("/catpics", ctrlWrapper(getCatPics));
 
 router.get("/dogpics", ctrlWrapper(getDogPics));
+
+router.get("/dogpicsApi", ValidateKeyAPI, ctrlWrapper(getDogPics));
 
 router.post("/morecatpics", ctrlWrapper(getMoreCatPics));
 
@@ -44,6 +49,8 @@ router.delete("/deletePlaces/:placeId", authenticateAndValidateKey, ctrlWrapper(
 router.patch("/avatars/:placeId", authenticateAndValidateKey, upload.single("avatar"), ctrlWrapper(updatePlaceAvatar));
 
 router.patch("/detailsUpdate/:placeId", authenticateAndValidateKey, ctrlWrapper(updatePlaceDetailsById));
+
+router.patch("/detailsUpdateApi/:placeId", ValidateKeyAPI, ctrlWrapper(updatePlaceDetailsById));
 
 router.get("/getWeather", authenticateToken, ctrlWrapper(getWeather));
 

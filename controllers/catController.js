@@ -43,8 +43,30 @@ const result = await Cat.create({ ...req.body, owner: _id });
   res.status(201).json(result);
 };
 
+const getSavedCatImages = async (req, res) => {
+  const { _id } = req.user;
+
+  const result = await Cat.find({ owner: _id }).sort({ _id: -1 });
+
+  res.status(200).json(result);
+};
+
+const deleteCatImageById = async (req, res) => {
+  
+  const { imageId } = req.params;
+
+  const myDeleted = await Cat.findByIdAndDelete(imageId);
+
+  if (!myDeleted) {
+    throw httpError(404, "Resource not found");
+  }
+
+   res.status(201).json(myDeleted);
+  
+};
+
 
 
 
 // prettier-ignore
-export { addCatImage };
+export { addCatImage, getSavedCatImages, deleteCatImageById };

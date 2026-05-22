@@ -22,10 +22,9 @@ const authenticateAndValidateKey = async (req, _res, next) => {
       next(httpError(401, "Not authorized"));
     }
 
-    req.user = user;
-
     const isValidKey = await theAuthAPI.apiKeys.isValidKey(user.apiKey);
     if (isValidKey) {
+      req.user = user;
       console.log("The API key is valid!");
     } else {
       throw httpError(401, "Invalid API key!");

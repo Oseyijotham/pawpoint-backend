@@ -72,8 +72,7 @@ export function fetchPlaces(category, country) {
     {
       method: "GET",
       headers: {
-        "x-api-key": OVERTUREMAPS_API_KEY,
-        "Content-Type": "application/json",
+        "x-api-key": OVERTUREMAPS_API_KEY
       },
     },
   );
@@ -86,7 +85,6 @@ export function fetchLocationKey(latitude, longitude) {
     {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
         Authorization: `Bearer ${ACCU_WEATHER_KEY}`,
       },
     },
@@ -99,7 +97,7 @@ export function fetchCurrentWeatherConditions(locationKey) {
     {
       method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        "accept": "application/json",
         Authorization: `Bearer ${ACCU_WEATHER_KEY}`,
       },
     },

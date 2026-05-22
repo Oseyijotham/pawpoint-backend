@@ -269,6 +269,15 @@ const getMoreDogPics = async (req, res) => {
   res.status(201).json({ moreDogPics: result, newPageNum: req.body.pageNum });
 };
 
+const getSavedPlacesApi = async (req, res) => {
+  const { _id } = req.user;
+
+  const result = await Place.find({ owner: _id }).sort({ _id: -1 });
+
+  res.status(200).json(result);
+};
+
+
 
 
 
@@ -286,4 +295,5 @@ export {
   getMoreCatPics,
   getMoreDogPics,
   getWeather,
+  getSavedPlacesApi
 };

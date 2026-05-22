@@ -43,8 +43,16 @@ const result = await Dog.create({ ...req.body, owner: _id });
   res.status(201).json(result);
 };
 
+const getSavedDogImages = async (req, res) => {
+  const { _id } = req.user;
+
+  const result = await Dog.find({ owner: _id }).sort({ _id: -1 });
+
+  res.status(200).json(result);
+};
+
 
 
 
 // prettier-ignore
-export { addDogImage };
+export { addDogImage, getSavedDogImages };
