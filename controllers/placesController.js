@@ -86,6 +86,36 @@ const getWeather = async (req, res) => {
   res.status(200).json(finalResult);
 };
 
+const getWeatherApi = async (req, res) => {
+  const { id } = req.params;
+
+  const myPlace = await Place.findOne({ _id: id });
+
+  console.log(myPlace);
+
+  const lat = myPlace.data.geometry.coordinates[1];
+
+  const long = myPlace.data.geometry.coordinates[0];
+
+  const response = await fetchLocationKey(lat, long);
+
+  const result = await response.json();
+
+  if (!result?.Key) {
+    throw httpError(404, "Location key not found");
+  }
+
+  const finalResponse = await fetchCurrentWeatherConditions(result.Key);
+
+  const finalResult = await finalResponse.json();
+
+  if (!finalResult) {
+    throw httpError(404, "Weather conditions not found");
+  }
+
+  res.status(200).json(finalResult);
+};
+
 const getMyPlaceById = async (req, res) => {
   const { placeId } = req.params;
   const result = await Place.findById(placeId);
@@ -295,5 +325,6 @@ export {
   getMoreCatPics,
   getMoreDogPics,
   getWeather,
-  getSavedPlacesApi
+  getSavedPlacesApi,
+  getWeatherApi,
 };

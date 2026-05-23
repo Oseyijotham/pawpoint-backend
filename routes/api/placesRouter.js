@@ -14,7 +14,8 @@ import {
   getMoreCatPics,
   getMoreDogPics,
   getWeather,
-  getSavedPlacesApi
+  getSavedPlacesApi,
+  getWeatherApi,
 } from "../../controllers/placesController.js";
 import { authenticateToken } from "../../middlewares/authenticateToken.js";
 import { upload } from "../../middlewares/upload.js";
@@ -52,7 +53,9 @@ router.patch("/detailsUpdate/:placeId", authenticateAndValidateKey, ctrlWrapper(
 
 router.patch("/detailsUpdateApi/:placeId", ValidateKeyAPI, ctrlWrapper(updatePlaceDetailsById));
 
-router.get("/getWeather", authenticateToken, ctrlWrapper(getWeather));
+router.get("/getWeather", authenticateAndValidateKey, ctrlWrapper(getWeather));
+
+router.get("/getWeatherApi/:id", ValidateKeyAPI, ctrlWrapper(getWeatherApi));
 
 
 export { router };
