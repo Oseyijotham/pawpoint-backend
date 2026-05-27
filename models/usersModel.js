@@ -25,7 +25,8 @@ const userSchema = new Schema(
     },
     avatarURL: {
       type: String,
-      default: "https://pawpoint-backend.onrender.com/avatars/unknownUser.png",
+      default:
+        "https://pawpoint-backend-i96r.onrender.com/avatars/unknownUser.png",
     },
     token: {
       type: String,
