@@ -86,6 +86,28 @@ const getWeather = async (req, res) => {
   res.status(200).json(finalResult);
 };
 
+const getNewWeather = async (req, res) => {
+  const { lat, long } = req.query;
+
+  const response = await fetchLocationKey(lat, long);
+
+  const result = await response.json();
+
+  if (!result?.Key) {
+    throw httpError(404, "Location key not found");
+  }
+
+  const finalResponse = await fetchCurrentWeatherConditions(result.Key);
+
+  const finalResult = await finalResponse.json();
+
+  if (!finalResult) {
+    throw httpError(404, "Weather conditions not found");
+  }
+
+  res.status(200).json(finalResult);
+};
+
 const getWeatherApi = async (req, res) => {
   const { id } = req.params;
 
@@ -327,4 +349,5 @@ export {
   getWeather,
   getSavedPlacesApi,
   getWeatherApi,
+  getNewWeather,
 };
