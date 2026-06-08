@@ -18,6 +18,7 @@ import {
   fetchLocationKey,
   fetchCurrentWeatherConditions,
 } from "../API's/Api.js";
+import endpointNames from "./endpoints.json" with { type: "json" };
 
 
 const {
@@ -329,6 +330,15 @@ const getSavedPlacesApi = async (req, res) => {
   res.status(200).json(result);
 };
 
+const fetchEndpointById = async (req, res) => {
+
+  const { pointId } = req.params;
+
+  const result = endpointNames.find((endpoint) => endpoint.id === pointId);
+
+  res.status(200).json(result);
+};
+
 
 
 
@@ -350,4 +360,5 @@ export {
   getSavedPlacesApi,
   getWeatherApi,
   getNewWeather,
+  fetchEndpointById,
 };

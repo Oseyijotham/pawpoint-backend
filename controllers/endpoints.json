@@ -1,0 +1,33 @@
+[
+  { "id":   "1",
+    "name": "Get all Saved Places"
+  },
+   {
+    "id":   "2",
+    "name": "Update a Place Description"
+  },
+   {
+    "id":   "8",
+    "name": "Get Place Weather Condition"
+  },
+   {
+    "id":   "3",
+    "name": "Get Saved Place Weather Condition"
+  },
+   {
+    "id":   "4",
+    "name": "Get all Saved Cat Images"
+  },
+  {
+    "id":   "5",
+    "name": "Get all Saved Dog Images"
+  },
+  {
+    "id":   "6",
+    "name": "Delete a Dog Image"
+  },
+  {
+    "id":   "7",
+    "name": "Delete a Cat Image"
+  }
+]
