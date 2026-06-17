@@ -55,7 +55,7 @@ router.patch("/detailsUpdate/:placeId", authenticateAndValidateKey, ctrlWrapper(
 
 router.patch("/detailsUpdateApi/:placeId", ValidateKeyAPI, ctrlWrapper(updatePlaceDetailsById));
 
-router.get("/getWeather", authenticateAndValidateKey, ctrlWrapper(getWeather));
+router.get("/getWeather", authenticateToken, ctrlWrapper(getWeather));
 
 router.get("/getNewWeatherApi", ValidateKeyAPI, ctrlWrapper(getNewWeather));
 
